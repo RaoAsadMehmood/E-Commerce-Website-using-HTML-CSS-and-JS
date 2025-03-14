@@ -21,6 +21,113 @@
 </head>
 
 <body>
+    <style>
+        /* Inline styling for mobile toggle and cart badge */
+        @media (max-width: 799px) {
+            #navbar {
+                display: none; /* Hidden by default */
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: 250px; /* Increased width for better spacing */
+                background: #1a1a1a; /* Dark background to match theme */
+                flex-direction: column;
+                padding: 40px 20px; /* More padding for better layout */
+                z-index: 1000;
+                transition: all 0.3s ease; /* Smooth transition for open/close */
+            }
+
+            #navbar.active {
+                display: flex; /* Show when active class is added */
+            }
+
+            #navbar li {
+                margin: 15px 0; /* Spacing between menu items */
+            }
+
+            #navbar li a {
+                color: #e3e6e6; /* Light text color to match theme */
+                font-size: 18px; /* Larger font for better readability */
+                font-weight: 500;
+                text-decoration: none;
+                transition: color 0.3s ease; /* Smooth color transition on hover */
+            }
+
+            #navbar li a:hover {
+                color: #6f42c1; /* Accent color on hover (purple shade from theme) */
+            }
+
+            #close {
+                display: none; /* Hidden by default */
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                font-size: 24px;
+                color: #e3e6e6; /* Light color for close icon */
+                cursor: pointer;
+                background: #6f42c1; /* Purple background for close button */
+                padding: 5px 10px;
+                border-radius: 50%;
+                transition: background 0.3s ease;
+            }
+
+            #close:hover {
+                background: #563d7c; /* Darker purple on hover */
+            }
+
+            #navbar.active #close {
+                display: block; /* Show close icon when navbar is active */
+            }
+
+            #mobile {
+                display: flex;
+                align-items: center;
+                gap: 15px; /* Space between cart and menu icons */
+            }
+
+            #bar {
+                font-size: 24px;
+                color: #e3e6e6; /* Light color for menu icon */
+                cursor: pointer;
+                transition: color 0.3s ease;
+            }
+
+            #bar:hover {
+                color: #6f42c1; /* Purple shade on hover */
+            }
+
+            /* Cart badge styling */
+            .cart-badge {
+                position: absolute;
+                top: -10px;
+                right: -10px;
+                background: #6f42c1; /* Purple background for badge */
+                color: #fff; /* White text */
+                font-size: 12px;
+                font-weight: 600;
+                padding: 2px 6px;
+                border-radius: 50%;
+                border: 2px solid #1a1a1a; /* Dark border to match background */
+            }
+
+            #lg-bag, #mobile {
+                position: relative; /* For positioning the badge */
+            }
+        }
+
+        /* Ensure cart badge styling applies to desktop view as well */
+        .cart-badge {
+            background: #6f42c1; /* Consistent purple background */
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 50%;
+            border: 2px solid #1a1a1a;
+        }
+    </style>
+    </style>
     <section id="header">
         <a style="text-decoration: none;" href="index.html">
             <p id="logo">Bandage</p>
@@ -199,6 +306,8 @@
         document.addEventListener('DOMContentLoaded', updateCartCount);
 
     </script>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
