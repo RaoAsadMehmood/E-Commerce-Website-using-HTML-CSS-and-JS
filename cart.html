@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,10 +15,15 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Custom CSS file link -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Firebase SDK (v9 compat version for browser compatibility) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 </head>
+
 <body>
     <section id="header">
-        <p id="logo">Bandage</p>
+        <a style="text-decoration: none;" href="index.html"><p id="logo">Bandage</p></a>
         <div>
             <ul id="navbar">
                 <li><a href="index.html">Home</a></li>
@@ -30,6 +36,9 @@
                         <i class="far fa-shopping-bag"></i>
                         <span id="cart-count" class="cart-badge">0</span>
                     </a>
+                </li>
+                <li id="auth-links">
+                    <!-- Dynamically updated via JavaScript -->
                 </li>
                 <a href="#" id="close"><i class="far fa-times"></i></a>
             </ul>
@@ -106,7 +115,9 @@
 
     <footer class="section-p1">
         <div class="col">
-            <a href="#"><p style="font-size: 30px; font-weight: 600; font-family: Rock Salt;">Bandage</p></a>
+            <a href="#">
+                <p style="font-size: 30px; font-weight: 600; font-family: Rock Salt;">Bandage</p>
+            </a>
             <h4>Contact</h4>
             <p><strong>Address:</strong> Karachi, Pakistan - 75950</p>
             <p><strong>Phone:</strong> +92-3262350445</p>
@@ -149,14 +160,15 @@
             <img src="images/pay/pay.png" alt="">
         </div>
         <div class="copyright">
-            <p>Created with ❤ By <span><a href="https://www.linkedin.com/in/rao-asad-mehmood/">Rao Asad Mehmood</a></span> | All Rights Reserved | © 2025</p>
+            <p>Created with ❤ By <span><a href="https://www.linkedin.com/in/rao-asad-mehmood/">Rao Asad
+                        Mehmood</a></span> | All Rights Reserved | © 2025</p>
         </div>
     </footer>
 
     <script>
-        let appliedCoupon = null; // To store applied coupon details
+        let appliedCoupon = null;
 
-        // Function to calculate total items in cart and update badge
+        // Function to update cart count
         function updateCartCount() {
             const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
             const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -164,7 +176,7 @@
             document.getElementById('mobile-cart-count').textContent = totalItems;
         }
 
-        // Load cart items from localStorage and display them
+        // Function to load cart
         function loadCart() {
             const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
             const cartTableBody = document.getElementById('cart-items');
@@ -175,7 +187,7 @@
             const cartSection = document.getElementById('cart');
             const cartAddSection = document.getElementById('cart-add');
 
-            // Show/hide cart table or empty message
+            // Show empty cart message if no items
             if (cartItems.length === 0) {
                 cartSection.style.display = 'none';
                 cartAddSection.style.display = 'none';
@@ -186,7 +198,7 @@
                 emptyCartMessage.style.display = 'none';
             }
 
-            cartTableBody.innerHTML = ''; // Clear existing rows
+            cartTableBody.innerHTML = '';
             let subtotal = 0;
 
             cartItems.forEach((item, index) => {
@@ -207,7 +219,7 @@
                 cartTableBody.innerHTML += row;
             });
 
-            // Apply discount if coupon is applied
+            // Calculate discount and total
             let discount = 0;
             if (appliedCoupon) {
                 if (appliedCoupon.type === 'percentage') {
@@ -219,7 +231,7 @@
 
             const total = subtotal - discount;
 
-            // Update subtotal, discount, and total
+            // Update totals
             cartSubtotalElement.textContent = `$${subtotal.toFixed(2)}`;
             cartDiscountElement.textContent = `-$${discount.toFixed(2)}`;
             cartTotalElement.innerHTML = `<strong>$${total.toFixed(2)}</strong>`;
@@ -228,7 +240,7 @@
             updateCartCount();
         }
 
-        // Remove item from cart with SweetAlert2 confirmation
+        // Function to remove item from cart
         function removeFromCart(index, itemName) {
             Swal.fire({
                 title: 'Are you sure?',
@@ -256,7 +268,7 @@
             });
         }
 
-        // Update quantity of an item with SweetAlert2 feedback
+        // Function to update quantity
         function updateQuantity(index, newQuantity, itemName) {
             let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
             newQuantity = parseInt(newQuantity);
@@ -273,15 +285,14 @@
             });
         }
 
-        // Apply coupon functionality with SweetAlert2
+        // Function to apply coupon
         function applyCoupon() {
             const couponCode = document.getElementById('couponInput').value.trim().toUpperCase();
             const couponMessage = document.getElementById('coupon-message');
 
-            // Dummy coupon codes for demo (you can replace with real ones)
             const coupons = {
-                'SAVE10': { type: 'percentage', value: 10 }, // 10% off
-                'FLAT50': { type: 'fixed', value: 50 }       // $50 off
+                'SAVE10': { type: 'percentage', value: 10 },
+                'FLAT50': { type: 'fixed', value: 50 }
             };
 
             if (coupons[couponCode]) {
@@ -290,11 +301,10 @@
                 couponMessage.style.color = 'green';
                 Swal.fire({
                     title: 'Coupon Applied!',
-                    text: `Coupon "${couponCode}" applied successfully! You saved ${
-                        appliedCoupon.type === 'percentage' 
-                        ? `${appliedCoupon.value}%` 
+                    text: `Coupon "${couponCode}" applied successfully! You saved ${appliedCoupon.type === 'percentage'
+                        ? `${appliedCoupon.value}%`
                         : `$${appliedCoupon.value}`
-                    }.`,
+                        }.`,
                     icon: 'success',
                     confirmButtonColor: '#3085d6'
                 });
@@ -310,10 +320,10 @@
                 });
             }
 
-            loadCart(); // Reload cart to apply discount
+            loadCart();
         }
 
-        // Proceed to checkout with SweetAlert2
+        // Function to proceed to checkout
         function proceedToCheckout() {
             const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
             if (cartItems.length === 0) {
@@ -344,14 +354,78 @@
                         timer: 1500,
                         showConfirmButton: false
                     }).then(() => {
-                        window.location.href = 'checkout.html'; 
+                        window.location.href = 'checkout.html';
                     });
                 }
             });
         }
 
-        // Load cart when the page loads
-        document.addEventListener('DOMContentLoaded', loadCart);
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCNNt-5skoWuHyNvwyd2QBZ6rd9KrfJzv4",
+            authDomain: "bandage-ecommerce.firebaseapp.com",
+            projectId: "bandage-ecommerce",
+            storageBucket: "bandage-ecommerce.firebasestorage.app",
+            messagingSenderId: "1035151679859",
+            appId: "1:1035151679859:web:b97536a1d83ef1cb2fe506"
+        };
+
+        firebase.initializeApp(firebaseConfig); 
+
+        // Function to update navbar based on auth state
+        function updateNavbarAuthLinks() {
+            const authLinks = document.getElementById('auth-links');
+            firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                    // User is logged in
+                    authLinks.innerHTML = `
+                        <li><a href="#" id="logout-link">Logout</a></li>
+                    `;
+                    document.getElementById('logout-link').addEventListener('click', (e) => {
+                        e.preventDefault();
+                        firebase.auth().signOut().then(() => {
+                            Swal.fire({
+                                title: 'Logged Out',
+                                text: 'You have been logged out successfully.',
+                                icon: 'success',
+                                confirmButtonColor: '#3085d6',
+                                timer: 1500,
+                                showConfirmButton: false
+                            }).then(() => {
+                                window.location.href = 'index.html';
+                            });
+                        }).catch((error) => {
+                            Swal.fire({
+                                title: 'Logout Failed',
+                                text: error.message,
+                                icon: 'error',
+                                confirmButtonColor: '#d33'
+                            });
+                        });
+                    });
+                } else {
+                    // User is not logged in
+                    authLinks.innerHTML = `
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="signup.html">Sign Up</a></li>
+                    `;
+                }
+            });
+        }
+
+        // Check auth state on page load and redirect to signup if not logged in
+        firebase.auth().onAuthStateChanged((user) => {
+            if (!user) {
+                window.location.href = 'signup.html'; 
+            }
+        });
+
+        // Load cart and update navbar on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCart();
+            updateNavbarAuthLinks();
+        });
     </script>
 </body>
+
 </html>
