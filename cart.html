@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,20 +7,17 @@
     <title>e-commerce website</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
-        </style>
-    <!-- font-awesome cdn link -->
+    </style>
+    <!-- Font-awesome CDN link -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
-
-    <!-- custom css file link -->
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Custom CSS file link -->
     <link rel="stylesheet" href="style.css">
-
 </head>
-
 <body>
-
     <section id="header">
         <p id="logo">Bandage</p>
-
         <div>
             <ul id="navbar">
                 <li><a href="index.html">Home</a></li>
@@ -29,19 +25,27 @@
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li id="lg-bag"><a class="active" href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+                <li id="lg-bag">
+                    <a href="cart.html">
+                        <i class="far fa-shopping-bag"></i>
+                        <span id="cart-count" class="cart-badge">0</span>
+                    </a>
+                </li>
                 <a href="#" id="close"><i class="far fa-times"></i></a>
             </ul>
         </div>
         <div id="mobile">
-            <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+            <a href="cart.html">
+                <i class="far fa-shopping-bag"></i>
+                <span id="mobile-cart-count" class="cart-badge">0</span>
+            </a>
             <i id="bar" class="fas fa-outdent"></i>
         </div>
     </section>
 
     <section id="page-header" class="about-header">
         <h2>#cart</h2>
-        <p>Add your coupon code & SAVE upto 70%!</p>
+        <p>Add your coupon code & SAVE up to 70%!</p>
     </section>
 
     <section id="cart" class="section-p1">
@@ -51,54 +55,41 @@
                     <td>Remove</td>
                     <td>Image</td>
                     <td>Product</td>
+                    <td>Size</td>
                     <td>Price</td>
                     <td>Quantity</td>
                     <td>Subtotal</td>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td><a href="#"><i class="fas fa-times-circle" style="color:black"></i></a></td>
-                    <td><img src="images/products/f1.jpg" alt=""></td>
-                    <td>Cartoon Astronaut T-Shirt</td>
-                    <td>$118.19</td>
-                    <td><input type="number" value="1"></td>
-                    <td>$118.19</td>
-                </tr>
-                <tr>
-                    <td><a href="#"><i class="fas fa-times-circle" style="color:black"></i></a></td>
-                    <td><img src="images/products/f2.jpg" alt=""></td>
-                    <td>Cartoon Astronaut T-Shirt</td>
-                    <td>$118.19</td>
-                    <td><input type="number" value="1"></td>
-                    <td>$118.19</td>
-                </tr>
-                <tr>
-                    <td><a href="#"><i class="fas fa-times-circle" style="color:black"></i></a></td>
-                    <td><img src="images/products/f3.jpg" alt=""></td>
-                    <td>Cartoon Astronaut T-Shirt</td>
-                    <td>$118.19</td>
-                    <td><input type="number" value="1"></td>
-                    <td>$118.19</td>
-                </tr>
+            <tbody id="cart-items">
+                <!-- Cart items will be dynamically added here -->
             </tbody>
         </table>
+        <div id="empty-cart-message">
+            <h3>Your cart is empty!</h3>
+            <p><a href="shop.html">Continue shopping</a></p>
+        </div>
     </section>
 
     <section id="cart-add" class="section-p1">
         <div class="coupon">
             <h3>Apply Coupon</h3>
             <div>
-                <input type="text" placeholder="Enter Your Coupon">
-                <button class="normal">Apply</button>
+                <input type="text" id="couponInput" placeholder="Enter Your Coupon">
+                <button class="normal" onclick="applyCoupon()">Apply</button>
             </div>
+            <p id="coupon-message"></p>
         </div>
         <div class="subtotal">
             <h3>Cart Totals</h3>
             <table>
                 <tr>
                     <td>Cart Subtotal</td>
-                    <td>$ 335</td>
+                    <td id="cart-subtotal">$0</td>
+                </tr>
+                <tr>
+                    <td>Discount</td>
+                    <td id="cart-discount">$0</td>
                 </tr>
                 <tr>
                     <td>Shipping</td>
@@ -106,10 +97,10 @@
                 </tr>
                 <tr>
                     <td><strong>Total</strong></td>
-                    <td><strong>$ 335</strong></td>
+                    <td id="cart-total"><strong>$0</strong></td>
                 </tr>
             </table>
-            <button class="normal">Proceed to checkout</button>
+            <button class="normal" onclick="proceedToCheckout()">Proceed to Checkout</button>
         </div>
     </section>
 
@@ -158,12 +149,209 @@
             <img src="images/pay/pay.png" alt="">
         </div>
         <div class="copyright">
-            <p>Created with ❤ By <span><a href="https://www.linkedin.com/in/rao-asad-mehmood/">Rao Asad Mehmood</a></span> | All Rights Reserved | &#169; 2025</p>
+            <p>Created with ❤ By <span><a href="https://www.linkedin.com/in/rao-asad-mehmood/">Rao Asad Mehmood</a></span> | All Rights Reserved | © 2025</p>
         </div>
     </footer>
 
-    <!-- javascript script file link -->
-    <script src="script.js"></script>
-</body>
+    <script>
+        let appliedCoupon = null; // To store applied coupon details
 
+        // Function to calculate total items in cart and update badge
+        function updateCartCount() {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = totalItems;
+            document.getElementById('mobile-cart-count').textContent = totalItems;
+        }
+
+        // Load cart items from localStorage and display them
+        function loadCart() {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartTableBody = document.getElementById('cart-items');
+            const cartSubtotalElement = document.getElementById('cart-subtotal');
+            const cartTotalElement = document.getElementById('cart-total');
+            const cartDiscountElement = document.getElementById('cart-discount');
+            const emptyCartMessage = document.getElementById('empty-cart-message');
+            const cartSection = document.getElementById('cart');
+            const cartAddSection = document.getElementById('cart-add');
+
+            // Show/hide cart table or empty message
+            if (cartItems.length === 0) {
+                cartSection.style.display = 'none';
+                cartAddSection.style.display = 'none';
+                emptyCartMessage.style.display = 'block';
+            } else {
+                cartSection.style.display = 'block';
+                cartAddSection.style.display = 'flex';
+                emptyCartMessage.style.display = 'none';
+            }
+
+            cartTableBody.innerHTML = ''; // Clear existing rows
+            let subtotal = 0;
+
+            cartItems.forEach((item, index) => {
+                const itemSubtotal = item.price * item.quantity;
+                subtotal += itemSubtotal;
+
+                const row = `
+                    <tr>
+                        <td><a href="#" onclick="removeFromCart(${index}, '${item.name}'); return false;"><i class="fas fa-times-circle" style="color:black"></i></a></td>
+                        <td><img src="${item.image}" alt="${item.name}"></td>
+                        <td>${item.name}</td>
+                        <td>${item.size || 'N/A'}</td>
+                        <td>$${item.price.toFixed(2)}</td>
+                        <td><input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${index}, this.value, '${item.name}')"></td>
+                        <td>$${itemSubtotal.toFixed(2)}</td>
+                    </tr>
+                `;
+                cartTableBody.innerHTML += row;
+            });
+
+            // Apply discount if coupon is applied
+            let discount = 0;
+            if (appliedCoupon) {
+                if (appliedCoupon.type === 'percentage') {
+                    discount = (subtotal * appliedCoupon.value) / 100;
+                } else if (appliedCoupon.type === 'fixed') {
+                    discount = appliedCoupon.value;
+                }
+            }
+
+            const total = subtotal - discount;
+
+            // Update subtotal, discount, and total
+            cartSubtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+            cartDiscountElement.textContent = `-$${discount.toFixed(2)}`;
+            cartTotalElement.innerHTML = `<strong>$${total.toFixed(2)}</strong>`;
+
+            // Update cart count
+            updateCartCount();
+        }
+
+        // Remove item from cart with SweetAlert2 confirmation
+        function removeFromCart(index, itemName) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: `Do you want to remove "${itemName}" from your cart?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, remove it!',
+                cancelButtonText: 'No, keep it'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+                    cartItems.splice(index, 1);
+                    localStorage.setItem('cart', JSON.stringify(cartItems));
+                    loadCart();
+                    Swal.fire({
+                        title: 'Removed!',
+                        text: `"${itemName}" has been removed from your cart.`,
+                        icon: 'success',
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
+                }
+            });
+        }
+
+        // Update quantity of an item with SweetAlert2 feedback
+        function updateQuantity(index, newQuantity, itemName) {
+            let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            newQuantity = parseInt(newQuantity);
+            if (newQuantity < 1) newQuantity = 1;
+            cartItems[index].quantity = newQuantity;
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+            loadCart();
+            Swal.fire({
+                title: 'Quantity Updated!',
+                text: `The quantity of "${itemName}" has been updated to ${newQuantity}.`,
+                icon: 'success',
+                timer: 1500,
+                showConfirmButton: false
+            });
+        }
+
+        // Apply coupon functionality with SweetAlert2
+        function applyCoupon() {
+            const couponCode = document.getElementById('couponInput').value.trim().toUpperCase();
+            const couponMessage = document.getElementById('coupon-message');
+
+            // Dummy coupon codes for demo (you can replace with real ones)
+            const coupons = {
+                'SAVE10': { type: 'percentage', value: 10 }, // 10% off
+                'FLAT50': { type: 'fixed', value: 50 }       // $50 off
+            };
+
+            if (coupons[couponCode]) {
+                appliedCoupon = coupons[couponCode];
+                couponMessage.textContent = `Coupon "${couponCode}" applied successfully!`;
+                couponMessage.style.color = 'green';
+                Swal.fire({
+                    title: 'Coupon Applied!',
+                    text: `Coupon "${couponCode}" applied successfully! You saved ${
+                        appliedCoupon.type === 'percentage' 
+                        ? `${appliedCoupon.value}%` 
+                        : `$${appliedCoupon.value}`
+                    }.`,
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6'
+                });
+            } else {
+                appliedCoupon = null;
+                couponMessage.textContent = 'Invalid coupon code.';
+                couponMessage.style.color = 'red';
+                Swal.fire({
+                    title: 'Invalid Coupon',
+                    text: 'The coupon code you entered is invalid.',
+                    icon: 'error',
+                    confirmButtonColor: '#d33'
+                });
+            }
+
+            loadCart(); // Reload cart to apply discount
+        }
+
+        // Proceed to checkout with SweetAlert2
+        function proceedToCheckout() {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cartItems.length === 0) {
+                Swal.fire({
+                    title: 'Empty Cart',
+                    text: 'Your cart is empty! Please add items to proceed.',
+                    icon: 'warning',
+                    confirmButtonColor: '#3085d6'
+                });
+                return;
+            }
+
+            Swal.fire({
+                title: 'Proceed to Checkout',
+                text: 'Are you ready to proceed to checkout?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, proceed!',
+                cancelButtonText: 'No, continue shopping'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Checkout',
+                        text: 'Redirecting to checkout...',
+                        icon: 'success',
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(() => {
+                        window.location.href = 'checkout.html'; 
+                    });
+                }
+            });
+        }
+
+        // Load cart when the page loads
+        document.addEventListener('DOMContentLoaded', loadCart);
+    </script>
+</body>
 </html>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,19 +7,17 @@
     <title>e-commerce website</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
-        </style>
-    <!-- font-awesome cdn link -->
+    </style>
+    <!-- Font-awesome CDN link -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
-
-    <!-- custom css file link -->
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Custom CSS file link -->
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
-
     <section id="header">
-
         <p id="logo">Bandage</p>
         <div>
             <ul id="navbar">
@@ -29,12 +26,20 @@
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+                <li id="lg-bag">
+                    <a href="cart.html">
+                        <i class="far fa-shopping-bag"></i>
+                        <span id="cart-count" class="cart-badge">0</span>
+                    </a>
+                </li>
                 <a href="#" id="close"><i class="far fa-times"></i></a>
             </ul>
         </div>
         <div id="mobile">
-            <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+            <a href="cart.html">
+                <i class="far fa-shopping-bag"></i>
+                <span id="mobile-cart-count" class="cart-badge">0</span>
+            </a>
             <i id="bar" class="fas fa-outdent"></i>
         </div>
     </section>
@@ -46,11 +51,11 @@
 
     <section id="product1" class="section-p1">
         <div class="pro-container">
-            <div class="pro" onclick="window.location.href='singleProduct.html';">
-                <img src="images/products/f1.jpg" alt="">
+            <div class="pro" onclick="window.location.href='singleProduct.html?name=Cartoon Astronaut T-Shirt&price=78&mainImage=images/products/f1.jpg&smallImages=images/products/f1.jpg,images/products/f2.jpg,images/products/f3.jpg,images/products/f4.jpg';">
+                <img src="images/products/f1.jpg" alt="Cartoon Astronaut T-Shirt">
                 <div class="des">
                     <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <h5>Cartoon Astronaut T-Shirt</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -60,13 +65,13 @@
                     </div>
                     <h4>$78</h4>
                 </div>
-                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="add-to-cart" onclick="event.stopPropagation(); addToCart('Cartoon Astronaut T-Shirt', 78, 'images/products/f1.jpg');"><i class="fas fa-shopping-cart"></i></button>
             </div>
-            <div class="pro">
-                <img src="images/products/f2.jpg" alt="">
+            <div class="pro" onclick="window.location.href='singleProduct.html?name=Cartoon Astronaut T-Shirt&price=78&mainImage=images/products/f2.jpg&smallImages=images/products/f2.jpg,images/products/f1.jpg,images/products/f3.jpg,images/products/f4.jpg';">
+                <img src="images/products/f2.jpg" alt="Cartoon Astronaut T-Shirt">
                 <div class="des">
                     <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <h5>Cartoon Astronaut T-Shirt</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -76,13 +81,13 @@
                     </div>
                     <h4>$78</h4>
                 </div>
-                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="add-to-cart" onclick="event.stopPropagation(); addToCart('Cartoon Astronaut T-Shirt', 78, 'images/products/f2.jpg');"><i class="fas fa-shopping-cart"></i></button>
             </div>
-            <div class="pro">
-                <img src="images/products/f3.jpg" alt="">
+            <div class="pro" onclick="window.location.href='singleProduct.html?name=Cartoon Astronaut T-Shirt&price=78&mainImage=images/products/f3.jpg&smallImages=images/products/f3.jpg,images/products/f1.jpg,images/products/f2.jpg,images/products/f4.jpg';">
+                <img src="images/products/f3.jpg" alt="Cartoon Astronaut T-Shirt">
                 <div class="des">
                     <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <h5>Cartoon Astronaut T-Shirt</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -92,13 +97,13 @@
                     </div>
                     <h4>$78</h4>
                 </div>
-                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="add-to-cart" onclick="event.stopPropagation(); addToCart('Cartoon Astronaut T-Shirt', 78, 'images/products/f3.jpg');"><i class="fas fa-shopping-cart"></i></button>
             </div>
-            <div class="pro">
-                <img src="images/products/f4.jpg" alt="">
+            <div class="pro" onclick="window.location.href='singleProduct.html?name=Cartoon Astronaut T-Shirt&price=78&mainImage=images/products/f4.jpg&smallImages=images/products/f4.jpg,images/products/f1.jpg,images/products/f2.jpg,images/products/f3.jpg';">
+                <img src="images/products/f4.jpg" alt="Cartoon Astronaut T-Shirt">
                 <div class="des">
                     <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <h5>Cartoon Astronaut T-Shirt</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -108,13 +113,13 @@
                     </div>
                     <h4>$78</h4>
                 </div>
-                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="add-to-cart" onclick="event.stopPropagation(); addToCart('Cartoon Astronaut T-Shirt', 78, 'images/products/f4.jpg');"><i class="fas fa-shopping-cart"></i></button>
             </div>
-            <div class="pro">
-                <img src="images/products/f5.jpg" alt="">
+            <div class="pro" onclick="window.location.href='singleProduct.html?name=Cartoon Astronaut T-Shirt&price=78&mainImage=images/products/f5.jpg&smallImages=images/products/f5.jpg,images/products/f1.jpg,images/products/f2.jpg,images/products/f3.jpg';">
+                <img src="images/products/f5.jpg" alt="Cartoon Astronaut T-Shirt">
                 <div class="des">
                     <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <h5>Cartoon Astronaut T-Shirt</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -124,13 +129,13 @@
                     </div>
                     <h4>$78</h4>
                 </div>
-                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="add-to-cart" onclick="event.stopPropagation(); addToCart('Cartoon Astronaut T-Shirt', 78, 'images/products/f5.jpg');"><i class="fas fa-shopping-cart"></i></button>
             </div>
-            <div class="pro">
-                <img src="images/products/f6.jpg" alt="">
+            <div class="pro" onclick="window.location.href='singleProduct.html?name=Cartoon Astronaut T-Shirt&price=78&mainImage=images/products/f6.jpg&smallImages=images/products/f6.jpg,images/products/f1.jpg,images/products/f2.jpg,images/products/f3.jpg';">
+                <img src="images/products/f6.jpg" alt="Cartoon Astronaut T-Shirt">
                 <div class="des">
                     <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <h5>Cartoon Astronaut T-Shirt</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -140,13 +145,13 @@
                     </div>
                     <h4>$78</h4>
                 </div>
-                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="add-to-cart" onclick="event.stopPropagation(); addToCart('Cartoon Astronaut T-Shirt', 78, 'images/products/f6.jpg');"><i class="fas fa-shopping-cart"></i></button>
             </div>
-            <div class="pro">
-                <img src="images/products/f7.jpg" alt="">
+            <div class="pro" onclick="window.location.href='singleProduct.html?name=Cartoon Astronaut T-Shirt&price=78&mainImage=images/products/f7.jpg&smallImages=images/products/f7.jpg,images/products/f1.jpg,images/products/f2.jpg,images/products/f3.jpg';">
+                <img src="images/products/f7.jpg" alt="Cartoon Astronaut T-Shirt">
                 <div class="des">
                     <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <h5>Cartoon Astronaut T-Shirt</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -156,13 +161,13 @@
                     </div>
                     <h4>$78</h4>
                 </div>
-                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="add-to-cart" onclick="event.stopPropagation(); addToCart('Cartoon Astronaut T-Shirt', 78, 'images/products/f7.jpg');"><i class="fas fa-shopping-cart"></i></button>
             </div>
-            <div class="pro">
-                <img src="images/products/f8.jpg" alt="">
+            <div class="pro" onclick="window.location.href='singleProduct.html?name=Cartoon Astronaut T-Shirt&price=78&mainImage=images/products/f8.jpg&smallImages=images/products/f8.jpg,images/products/f1.jpg,images/products/f2.jpg,images/products/f3.jpg';">
+                <img src="images/products/f8.jpg" alt="Cartoon Astronaut T-Shirt">
                 <div class="des">
                     <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <h5>Cartoon Astronaut T-Shirt</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -172,13 +177,13 @@
                     </div>
                     <h4>$78</h4>
                 </div>
-                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="add-to-cart" onclick="event.stopPropagation(); addToCart('Cartoon Astronaut T-Shirt', 78, 'images/products/f8.jpg');"><i class="fas fa-shopping-cart"></i></button>
             </div>
-            <div class="pro">
-                <img src="images/products/n1.jpg" alt="">
+            <div class="pro" onclick="window.location.href='singleProduct.html?name=Cartoon Astronaut T-Shirt&price=78&mainImage=images/products/n1.jpg&smallImages=images/products/n1.jpg,images/products/f1.jpg,images/products/f2.jpg,images/products/f3.jpg';">
+                <img src="images/products/n1.jpg" alt="Cartoon Astronaut T-Shirt">
                 <div class="des">
                     <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <h5>Cartoon Astronaut T-Shirt</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -188,13 +193,13 @@
                     </div>
                     <h4>$78</h4>
                 </div>
-                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="add-to-cart" onclick="event.stopPropagation(); addToCart('Cartoon Astronaut T-Shirt', 78, 'images/products/n1.jpg');"><i class="fas fa-shopping-cart"></i></button>
             </div>
-            <div class="pro">
-                <img src="images/products/n2.jpg" alt="">
+            <div class="pro" onclick="window.location.href='singleProduct.html?name=Cartoon Astronaut T-Shirt&price=78&mainImage=images/products/n2.jpg&smallImages=images/products/n2.jpg,images/products/f1.jpg,images/products/f2.jpg,images/products/f3.jpg';">
+                <img src="images/products/n2.jpg" alt="Cartoon Astronaut T-Shirt">
                 <div class="des">
                     <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <h5>Cartoon Astronaut T-Shirt</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -204,13 +209,13 @@
                     </div>
                     <h4>$78</h4>
                 </div>
-                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="add-to-cart" onclick="event.stopPropagation(); addToCart('Cartoon Astronaut T-Shirt', 78, 'images/products/n2.jpg');"><i class="fas fa-shopping-cart"></i></button>
             </div>
-            <div class="pro">
-                <img src="images/products/n3.jpg" alt="">
+            <div class="pro" onclick="window.location.href='singleProduct.html?name=Cartoon Astronaut T-Shirt&price=78&mainImage=images/products/n3.jpg&smallImages=images/products/n3.jpg,images/products/f1.jpg,images/products/f2.jpg,images/products/f3.jpg';">
+                <img src="images/products/n3.jpg" alt="Cartoon Astronaut T-Shirt">
                 <div class="des">
                     <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <h5>Cartoon Astronaut T-Shirt</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -220,13 +225,13 @@
                     </div>
                     <h4>$78</h4>
                 </div>
-                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="add-to-cart" onclick="event.stopPropagation(); addToCart('Cartoon Astronaut T-Shirt', 78, 'images/products/n3.jpg');"><i class="fas fa-shopping-cart"></i></button>
             </div>
-            <div class="pro">
-                <img src="images/products/n4.jpg" alt="">
+            <div class="pro" onclick="window.location.href='singleProduct.html?name=Cartoon Astronaut T-Shirt&price=78&mainImage=images/products/n4.jpg&smallImages=images/products/n4.jpg,images/products/f1.jpg,images/products/f2.jpg,images/products/f3.jpg';">
+                <img src="images/products/n4.jpg" alt="Cartoon Astronaut T-Shirt">
                 <div class="des">
                     <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <h5>Cartoon Astronaut T-Shirt</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -236,13 +241,13 @@
                     </div>
                     <h4>$78</h4>
                 </div>
-                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="add-to-cart" onclick="event.stopPropagation(); addToCart('Cartoon Astronaut T-Shirt', 78, 'images/products/n4.jpg');"><i class="fas fa-shopping-cart"></i></button>
             </div>
-            <div class="pro">
-                <img src="images/products/n5.jpg" alt="">
+            <div class="pro" onclick="window.location.href='singleProduct.html?name=Cartoon Astronaut T-Shirt&price=78&mainImage=images/products/n5.jpg&smallImages=images/products/n5.jpg,images/products/f1.jpg,images/products/f2.jpg,images/products/f3.jpg';">
+                <img src="images/products/n5.jpg" alt="Cartoon Astronaut T-Shirt">
                 <div class="des">
                     <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <h5>Cartoon Astronaut T-Shirt</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -252,13 +257,13 @@
                     </div>
                     <h4>$78</h4>
                 </div>
-                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="add-to-cart" onclick="event.stopPropagation(); addToCart('Cartoon Astronaut T-Shirt', 78, 'images/products/n5.jpg');"><i class="fas fa-shopping-cart"></i></button>
             </div>
-            <div class="pro">
-                <img src="images/products/n6.jpg" alt="">
+            <div class="pro" onclick="window.location.href='singleProduct.html?name=Cartoon Astronaut T-Shirt&price=78&mainImage=images/products/n6.jpg&smallImages=images/products/n6.jpg,images/products/f1.jpg,images/products/f2.jpg,images/products/f3.jpg';">
+                <img src="images/products/n6.jpg" alt="Cartoon Astronaut T-Shirt">
                 <div class="des">
                     <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <h5>Cartoon Astronaut T-Shirt</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -268,13 +273,13 @@
                     </div>
                     <h4>$78</h4>
                 </div>
-                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="add-to-cart" onclick="event.stopPropagation(); addToCart('Cartoon Astronaut T-Shirt', 78, 'images/products/n6.jpg');"><i class="fas fa-shopping-cart"></i></button>
             </div>
-            <div class="pro">
-                <img src="images/products/n7.jpg" alt="">
+            <div class="pro" onclick="window.location.href='singleProduct.html?name=Cartoon Astronaut T-Shirt&price=78&mainImage=images/products/n7.jpg&smallImages=images/products/n7.jpg,images/products/f1.jpg,images/products/f2.jpg,images/products/f3.jpg';">
+                <img src="images/products/n7.jpg" alt="Cartoon Astronaut T-Shirt">
                 <div class="des">
                     <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <h5>Cartoon Astronaut T-Shirt</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -284,13 +289,13 @@
                     </div>
                     <h4>$78</h4>
                 </div>
-                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="add-to-cart" onclick="event.stopPropagation(); addToCart('Cartoon Astronaut T-Shirt', 78, 'images/products/n7.jpg');"><i class="fas fa-shopping-cart"></i></button>
             </div>
-            <div class="pro">
-                <img src="images/products/n8.jpg" alt="">
+            <div class="pro" onclick="window.location.href='singleProduct.html?name=Cartoon Astronaut T-Shirt&price=78&mainImage=images/products/n8.jpg&smallImages=images/products/n8.jpg,images/products/f1.jpg,images/products/f2.jpg,images/products/f3.jpg';">
+                <img src="images/products/n8.jpg" alt="Cartoon Astronaut T-Shirt">
                 <div class="des">
                     <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <h5>Cartoon Astronaut T-Shirt</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -300,7 +305,7 @@
                     </div>
                     <h4>$78</h4>
                 </div>
-                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="add-to-cart" onclick="event.stopPropagation(); addToCart('Cartoon Astronaut T-Shirt', 78, 'images/products/n8.jpg');"><i class="fas fa-shopping-cart"></i></button>
             </div>
         </div>
     </section>
@@ -324,7 +329,6 @@
 
     <footer class="section-p1">
         <div class="col">
-            <!-- <img class="logo" src="images/logo.png" alt=""> -->
             <a href="#"><p style="font-size: 30px; font-weight: 600; font-family: Rock Salt;">Bandage</p></a>
             <h4>Contact</h4>
             <p><strong>Address:</strong> Karachi, Pakistan - 75950</p>
@@ -368,13 +372,51 @@
             <img src="images/pay/pay.png" alt="">
         </div>
         <div class="copyright">
-            <p>Created with ❤ By <span><a href="https://www.linkedin.com/in/rao-asad-mehmood/">Rao Asad Mehmood</a></span> | All Rights Reserved | &#169; 2025</p>
-
+            <p>Created with ❤ By <span><a href="https://www.linkedin.com/in/rao-asad-mehmood/">Rao Asad Mehmood</a></span> | All Rights Reserved | © 2025</p>
         </div>
     </footer>
 
-    <!-- javascript script file link -->
-    <script src="script.js"></script>
-</body>
+    <!-- JavaScript to handle Add to Cart and Cart Count -->
+    <script>
+        function addToCart(name, price, image) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingItem = cart.find(item => item.name === name && item.image === image);
+            if (existingItem) {
+                existingItem.quantity += 1;
+                Swal.fire({
+                    title: 'Item Updated!',
+                    text: `"${name}" quantity increased to ${existingItem.quantity}.`,
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    image: image,
+                    quantity: 1
+                });
+                Swal.fire({
+                    title: 'Added to Cart!',
+                    text: `"${name}" has been added to your cart.`,
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        }
 
+        function updateCartCount() {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = totalItems;
+            document.getElementById('mobile-cart-count').textContent = totalItems;
+        }
+
+        document.addEventListener('DOMContentLoaded', updateCartCount);
+    </script>
+</body>
 </html>
