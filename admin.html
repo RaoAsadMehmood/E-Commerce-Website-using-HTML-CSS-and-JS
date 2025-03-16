@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Bandage</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+
+        /* Inline styling for mobile toggle, cart badge, and admin panel */
+        @media (max-width: 799px) {
+            #navbar {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: 250px;
+                background: #1a1a1a;
+                flex-direction: column;
+                padding: 40px 20px;
+                z-index: 1000;
+                transition: all 0.3s ease;
+            }
+
+            #navbar.active {
+                display: flex;
+            }
+
+            #navbar li {
+                margin: 15px 0;
+            }
+
+            #navbar li a {
+                color: #e3e6e6;
+                font-size: 18px;
+                font-weight: 500;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+            #navbar li a:hover {
+                color: #6f42c1;
+            }
+
+            #close {
+                display: none;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                font-size: 24px;
+                color: #e3e6e6;
+                cursor: pointer;
+                background: #6f42c1;
+                padding: 5px 10px;
+                border-radius: 50%;
+                transition: background 0.3s ease;
+            }
+
+            #close:hover {
+                background: #563d7c;
+            }
+
+            #navbar.active #close {
+                display: block;
+            }
+
+            #mobile {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+
+            #bar {
+                font-size: 24px;
+                color: #e3e6e6;
+                cursor: pointer;
+                transition: color 0.3s ease;
+            }
+
+            #bar:hover {
+                color: #6f42c1;
+            }
+
+            .cart-badge {
+                position: absolute;
+                top: -10px;
+                right: -10px;
+                background: #6f42c1;
+                color: #fff;
+                font-size: 12px;
+                font-weight: 600;
+                padding: 2px 6px;
+                border-radius: 50%;
+                border: 2px solid #1a1a1a;
+            }
+
+            #lg-bag, #mobile {
+                position: relative;
+            }
+        }
+
+        .cart-badge {
+            background: #6f42c1;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 50%;
+            border: 2px solid #1a1a1a;
+        }
+
+        /* Admin panel styling */
+        #admin-section {
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        #admin-section h2 {
+            text-align: center;
+            font-size: 32px;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+        }
+
+        /* Add product form styling */
+        #add-product-form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #add-product-form input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        #add-product-form input:focus {
+            border-color: #6f42c1;
+        }
+
+        #add-product-form button {
+            padding: 10px;
+            background: #6f42c1;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+
+        #add-product-form button:hover {
+            background: #563d7c;
+        }
+
+        /* Product card styling (matching shop.html) */
+        .pro-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .pro {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .pro:hover {
+            transform: translateY(-5px);
+        }
+
+        .pro img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .pro .des {
+            margin: 10px 0;
+        }
+
+        .pro .des span {
+            color: #606063;
+            font-size: 14px;
+        }
+
+        .pro .des h5 {
+            font-size: 16px;
+            color: #1a1a1a;
+            margin: 5px 0;
+        }
+
+        .pro .des .star {
+            color: #ffb21e;
+        }
+
+        .pro .des h4 {
+            font-size: 18px;
+            color: #088178;
+            margin-top: 5px;
+        }
+
+        /* Admin buttons (Edit/Delete) */
+        .admin-buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+            gap: 10px;
+        }
+
+        .admin-buttons button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .edit-btn {
+            background: #6f42c1;
+            color: #fff;
+        }
+
+        .edit-btn:hover {
+            background: #563d7c;
+        }
+
+        .delete-btn {
+            background: #d33;
+            color: #fff;
+        }
+
+        .delete-btn:hover {
+            background: #b32d2d;
+        }
+
+        /* Edit form modal (hidden by default) */
+        #edit-product-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 2000;
+            flex-direction: column;
+            gap: 15px;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        #edit-product-form.active {
+            display: flex;
+        }
+
+        #edit-product-form input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        #edit-product-form input:focus {
+            border-color: #6f42c1;
+        }
+
+        #edit-product-form button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+
+        #edit-product-form button[type="submit"] {
+            background: #6f42c1;
+            color: #fff;
+        }
+
+        #edit-product-form button[type="submit"]:hover {
+            background: #563d7c;
+        }
+
+        #edit-product-form button[type="button"] {
+            background: #d33;
+            color: #fff;
+        }
+
+        #edit-product-form button[type="button"]:hover {
+            background: #b32d2d;
+        }
+
+        /* Overlay for edit form */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1500;
+        }
+
+        #overlay.active {
+            display: block;
+        }
+    </style>
+    <!-- Font-awesome CDN link -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Custom CSS file link -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+    <section id="header">
+        <a style="text-decoration: none;" href="index.html"><p id="logo">Bandage</p></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li id="lg-bag">
+                    <a href="cart.html">
+                        <i class="far fa-shopping-bag"></i>
+                        <span id="cart-count" class="cart-badge">0</span>
+                    </a>
+                </li>
+                <li id="auth-links">
+                    <!-- Dynamically updated via JavaScript -->
+                </li>
+                <a href="#" id="close"><i class="far fa-times"></i></a>
+            </ul>
+        </div>
+        <div id="mobile">
+            <a href="cart.html">
+                <i class="far fa-shopping-bag"></i>
+                <span id="mobile-cart-count" class="cart-badge">0</span>
+            </a>
+            <i id="bar" class="fas fa-outdent"></i>
+        </div>
+    </section>
+
+    <section id="admin-section">
+        <h2>Admin Panel - Manage Products</h2>
+
+        <!-- Add Product Form -->
+        <form id="add-product-form">
+            <input type="text" id="product-name" placeholder="Product Name" required>
+            <input type="number" id="product-price" placeholder="Price ($)" required>
+            <input type="text" id="product-image" placeholder="Image URL" required>
+            <input type="text" id="product-brand" placeholder="Brand (e.g., adidas)" required>
+            <button type="submit">Add Product</button>
+        </form>
+
+        <!-- Product Listing -->
+        <div class="pro-container" id="product-list">
+            <!-- Products will be dynamically added here -->
+        </div>
+
+        <!-- Edit Product Form (Modal) -->
+        <form id="edit-product-form">
+            <input type="hidden" id="edit-product-id">
+            <input type="text" id="edit-product-name" placeholder="Product Name" required>
+            <input type="number" id="edit-product-price" placeholder="Price ($)" required>
+            <input type="text" id="edit-product-image" placeholder="Image URL" required>
+            <input type="text" id="edit-product-brand" placeholder="Brand (e.g., adidas)" required>
+            <button type="submit">Update Product</button>
+            <button type="button" id="cancel-edit">Cancel</button>
+        </form>
+
+        <!-- Overlay for Edit Form -->
+        <div id="overlay"></div>
+    </section>
+
+    <footer class="section-p1">
+        <div class="col">
+            <a href="#"><p style="font-size: 30px; font-weight: 600; font-family: Rock Salt;">Bandage</p></a>
+            <h4>Contact</h4>
+            <p><strong>Address:</strong> Karachi, Pakistan - 75950</p>
+            <p><strong>Phone:</strong> +92-3262350445</p>
+            <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
+            <div class="follow">
+                <h4>Follow us</h4>
+                <div class="icon">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-pinterest-p"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <h4>About</h4>
+            <a href="about.html">About us</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="#">Sign In</a>
+            <a href="cart.html">View Cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Help</a>
+        </div>
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>From App Store or Google Play</p>
+            <div class="row">
+                <img src="images/pay/app.jpg" alt="">
+                <img src="images/pay/play.jpg" alt="">
+            </div>
+            <p>Secured Payment Gateway</p>
+            <img src="images/pay/pay.png" alt="">
+        </div>
+        <div class="copyright">
+            <p>Created with ❤ By <span><a href="https://www.linkedin.com/in/rao-asad-mehmood/">Rao Asad Mehmood</a></span> | All Rights Reserved | © 2025</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCNNt-5skoWuHyNvwyd2QBZ6rd9KrfJzv4",
+            authDomain: "bandage-ecommerce.firebaseapp.com",
+            projectId: "bandage-ecommerce",
+            storageBucket: "bandage-ecommerce.firebasestorage.app",
+            messagingSenderId: "1035151679859",
+            appId: "1:1035151679859:web:b97536a1d83ef1cb2fe506"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Mobile menu toggle functionality
+        const bar = document.getElementById('bar');
+        const close = document.getElementById('close');
+        const nav = document.getElementById('navbar');
+
+        if (bar) {
+            bar.addEventListener('click', () => {
+                nav.classList.add('active');
+            });
+        }
+
+        if (close) {
+            close.addEventListener('click', (e) => {
+                e.preventDefault();
+                nav.classList.remove('active');
+            });
+        }
+
+        // Function to update cart count
+        function updateCartCount() {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = totalItems;
+            document.getElementById('mobile-cart-count').textContent = totalItems;
+        }
+
+        // Function to update navbar based on auth state
+        function updateNavbarAuthLinks() {
+            const authLinks = document.getElementById('auth-links');
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    authLinks.innerHTML = `
+                        <li><a href="#" id="logout-link">Logout</a></li>
+                        <li><a href="admin.html">Admin Panel</a></li>
+                    `;
+                    document.getElementById('logout-link').addEventListener('click', (e) => {
+                        e.preventDefault();
+                        auth.signOut().then(() => {
+                            Swal.fire({
+                                title: 'Logged Out',
+                                text: 'You have been logged out successfully.',
+                                icon: 'success',
+                                timer: 1500,
+                                showConfirmButton: false
+                            }).then(() => {
+                                window.location.href = 'index.html';
+                            });
+                        }).catch((error) => {
+                            Swal.fire({
+                                title: 'Logout Failed',
+                                text: error.message,
+                                icon: 'error',
+                            });
+                        });
+                    });
+                } else {
+                    authLinks.innerHTML = `
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="signup.html">Sign Up</a></li>
+                    `;
+                }
+            });
+        }
+
+        // Check if user is admin
+        auth.onAuthStateChanged((user) => {
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            db.collection('users').doc(user.uid).get().then((doc) => {
+                if (!doc.exists || !doc.data().isAdmin) {
+                    Swal.fire({
+                        title: 'Access Denied',
+                        text: 'You are not authorized to access the admin panel.',
+                        icon: 'error',
+                        timer: 2000,
+                        showConfirmButton: false
+                    }).then(() => {
+                        window.location.href = 'index.html';
+                    });
+                } else {
+                    loadProducts();
+                }
+            }).catch((error) => {
+                console.error('Error checking admin status:', error);
+                window.location.href = 'index.html';
+            });
+        });
+
+        // Load products from Firestore
+        function loadProducts() {
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = '';
+
+            db.collection('products').get().then((snapshot) => {
+                snapshot.forEach((doc) => {
+                    const product = doc.data();
+                    const productId = doc.id;
+                    const productCard = `
+                        <div class="pro">
+                            <img src="${product.image}" alt="${product.name}">
+                            <div class="des">
+                                <span>${product.brand}</span>
+                                <h5>${product.name}</h5>
+                                <div class="star">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <h4>$${product.price}</h4>
+                            </div>
+                            <div class="admin-buttons">
+                                <button class="edit-btn" onclick="editProduct('${productId}', '${product.name}', ${product.price}, '${product.image}', '${product.brand}')">Edit</button>
+                                <button class="delete-btn" onclick="deleteProduct('${productId}')">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                    productList.innerHTML += productCard;
+                });
+            }).catch((error) => {
+                console.error('Error loading products:', error);
+            });
+        }
+
+        // Add product
+        document.getElementById('add-product-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('product-name').value;
+            const price = parseFloat(document.getElementById('product-price').value);
+            const image = document.getElementById('product-image').value;
+            const brand = document.getElementById('product-brand').value;
+
+            db.collection('products').add({
+                name: name,
+                price: price,
+                image: image,
+                brand: brand
+            }).then(() => {
+                Swal.fire({
+                    title: 'Product Added',
+                    text: 'Product has been added successfully.',
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+                document.getElementById('add-product-form').reset();
+                loadProducts();
+            }).catch((error) => {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Failed to add product: ' + error.message,
+                    icon: 'error'
+                });
+            });
+        });
+
+        // Edit product
+        window.editProduct = function(id, name, price, image, brand) {
+            document.getElementById('edit-product-id').value = id;
+            document.getElementById('edit-product-name').value = name;
+            document.getElementById('edit-product-price').value = price;
+            document.getElementById('edit-product-image').value = image;
+            document.getElementById('edit-product-brand').value = brand;
+
+            document.getElementById('edit-product-form').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+        };
+
+        document.getElementById('edit-product-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const id = document.getElementById('edit-product-id').value;
+            const name = document.getElementById('edit-product-name').value;
+            const price = parseFloat(document.getElementById('edit-product-price').value);
+            const image = document.getElementById('edit-product-image').value;
+            const brand = document.getElementById('edit-product-brand').value;
+
+            db.collection('products').doc(id).update({
+                name: name,
+                price: price,
+                image: image,
+                brand: brand
+            }).then(() => {
+                Swal.fire({
+                    title: 'Product Updated',
+                    text: 'Product has been updated successfully.',
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+                closeEditForm();
+                loadProducts();
+            }).catch((error) => {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Failed to update product: ' + error.message,
+                    icon: 'error'
+                });
+            });
+        });
+
+        document.getElementById('cancel-edit').addEventListener('click', () => {
+            closeEditForm();
+        });
+
+        function closeEditForm() {
+            document.getElementById('edit-product-form').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        }
+
+        // Delete product
+        window.deleteProduct = function(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#6f42c1',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    db.collection('products').doc(id).delete().then(() => {
+                        Swal.fire({
+                            title: 'Deleted!',
+                            text: 'Product has been deleted.',
+                            icon: 'success',
+                            timer: 1500,
+                            showConfirmButton: false
+                        });
+                        loadProducts();
+                    }).catch((error) => {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Failed to delete product: ' + error.message,
+                            icon: 'error'
+                        });
+                    });
+                }
+            });
+        }
+
+        // Load cart count and update navbar on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartCount();
+            updateNavbarAuthLinks();
+        });
+    </script>
+</body>
+</html>
+
+
