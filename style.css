@@ -8,7 +8,7 @@
 }
 
 #logo {
-    font-size: 28px; 
+    font-size: 28px;
     font-weight: 700;
     font-family: 'Rock Salt', cursive;
     text-decoration: none;
@@ -16,7 +16,7 @@
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-#logo a{
+#logo a {
     text-decoration: none;
 }
 
@@ -57,9 +57,9 @@ p {
     padding: 60px 100px;
 }
 
-.section-m1 {
+/* .section-m1 {
     margin: 50px 0;
-}
+} */
 
 button.normal {
     font-size: 16px;
@@ -107,13 +107,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 60px; /* Reduced padding for a more compact look */
+    padding: 15px 60px;
+    /* Reduced padding for a more compact look */
     background: linear-gradient(120deg, #dfe4ea, #ced4da);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     z-index: 999;
     position: sticky;
     top: 0;
-    height: 80px; /* Fixed height to make it slimmer */
+    height: 80px;
+    /* Fixed height to make it slimmer */
 }
 
 #navbar {
@@ -124,13 +126,15 @@ body {
 
 #navbar li {
     list-style: none;
-    padding: 0 15px; /* Reduced padding between links */
+    padding: 0 15px;
+    /* Reduced padding between links */
     position: relative;
 }
 
 #navbar li a {
     text-decoration: none;
-    font-size: 16px; /* Slightly smaller font size for links */
+    font-size: 16px;
+    /* Slightly smaller font size for links */
     font-weight: 600;
     color: #2f3542;
     transition: all 0.3s ease;
@@ -177,7 +181,8 @@ body {
 }
 
 #navbar #auth-links li a::after {
-    content: none; /* No underline for auth links */
+    content: none;
+    /* No underline for auth links */
 }
 
 /* Update Media Queries for Navbar */
@@ -192,6 +197,7 @@ body {
         padding: 10px 15px;
     }
 }
+
 #mobile {
     display: none;
     align-items: center;
@@ -200,6 +206,7 @@ body {
 #close {
     display: none;
 }
+
 /* Home Page */
 #hero {
     background-image: url(images/hero4copy.png);
@@ -487,8 +494,10 @@ body {
     position: relative;
     overflow: hidden;
     margin-bottom: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effects */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Added subtle shadow for consistency */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Added transition for hover effects */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    /* Added subtle shadow for consistency */
 }
 
 #sm-banner .banner-box::before {
@@ -500,17 +509,21 @@ body {
     height: 100%;
     background: rgba(0, 0, 0, 0.3);
     z-index: 1;
-    transition: background 0.3s ease; /* Added transition for overlay change */
+    transition: background 0.3s ease;
+    /* Added transition for overlay change */
 }
 
 /* Hover Effects */
 #sm-banner .banner-box:hover {
-    transform: translateY(-5px); /* Slight lift on hover */
-    box-shadow: 0 15px 35px rgba(255, 78, 91, 0.2); /* Enhanced shadow on hover */
+    transform: translateY(-5px);
+    /* Slight lift on hover */
+    box-shadow: 0 15px 35px rgba(255, 78, 91, 0.2);
+    /* Enhanced shadow on hover */
 }
 
 #sm-banner .banner-box:hover::before {
-    background: rgba(0, 0, 0, 0.5); /* Darker overlay on hover for better contrast */
+    background: rgba(0, 0, 0, 0.5);
+    /* Darker overlay on hover for better contrast */
 }
 
 /* Existing styles for text and button (unchanged) */
@@ -553,35 +566,35 @@ body {
 
 #banner3 {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     flex-wrap: wrap;
-    padding: 0 60px; 
-    margin: 40px 0; 
+    padding: 0 60px;
+    margin: 40px 0;
 }
 
 #banner3 .banner-box {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
     background-image: url(images/banner/b7.jpg);
     background-size: cover;
     background-position: center;
-    flex: 1; 
-    min-width: 30%; 
-    height: 40vh; 
+    flex: 1;
+    min-width: 30%;
+    height: 40vh;
     padding: 30px;
-    margin: 10px; 
-    border-radius: 20px; 
+    margin: 10px;
+    border-radius: 20px;
     position: relative;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 #banner3 .banner-box:hover {
-    transform: translateY(-5px); 
-    box-shadow: 0 15px 35px rgba(255, 78, 91, 0.2); 
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(255, 78, 91, 0.2);
 }
 
 #banner3 .banner-box::before {
@@ -593,31 +606,31 @@ body {
     height: 100%;
     background: rgba(0, 0, 0, 0.35);
     z-index: 1;
-    transition: background 0.3s ease; 
+    transition: background 0.3s ease;
 }
 
 #banner3 .banner-box:hover::before {
-    background: rgba(0, 0, 0, 0.5); 
+    background: rgba(0, 0, 0, 0.5);
 }
 
 #banner3 h2,
 #banner3 h3 {
     position: relative;
     z-index: 2;
-    text-align: center; 
+    text-align: center;
 }
 
 #banner3 h2 {
     color: #fff;
     font-weight: 900;
-    font-size: 28px; 
+    font-size: 28px;
     margin-bottom: 10px;
 }
 
 #banner3 h3 {
     color: #ff9068;
     font-weight: 800;
-    font-size: 20px; 
+    font-size: 20px;
 }
 
 #banner3 .banner-box:nth-child(2) {
@@ -636,8 +649,8 @@ body {
     }
 
     #banner3 .banner-box {
-        flex: 100%; 
-        min-width: 45%; 
+        flex: 100%;
+        min-width: 45%;
         height: 35vh;
         margin: 15px 0;
     }
@@ -651,8 +664,8 @@ body {
     }
 
     #banner3 .banner-box {
-        flex: 100%; 
-        min-width: 90%; 
+        flex: 100%;
+        min-width: 90%;
         height: 30vh;
         margin: 15px 0;
     }
@@ -671,7 +684,12 @@ body {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    background: linear-gradient(135deg, #1e272e, #2f3542);
+    background: rgb(4, 0, 0);
+    background: linear-gradient(90deg, rgba(4, 0, 0, 1) 0%, rgba(117, 11, 16, 1) 79%);
+
+    /* background: rgb(7, 7, 14);
+    background: linear-gradient(90deg, rgba(7, 7, 14, 1) 2%, rgba(117, 11, 16, 1) 32%); */
+
     padding: 60px 100px;
 }
 
@@ -727,7 +745,12 @@ footer {
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 60px 100px;
-    background: #1e272e;
+    /* background: #1e272e; */
+    /* background: rgb(7, 7, 14);
+    background: linear-gradient(90deg, rgba(7, 7, 14, 1) 2%, rgba(117, 11, 16, 1) 32%); */
+    background: rgb(4, 0, 0);
+    background: linear-gradient(90deg, rgba(4, 0, 0, 1) 0%, rgba(117, 11, 16, 1) 79%);
+    margin-top: 1px;
 }
 
 footer .col {
@@ -1379,21 +1402,25 @@ footer .copyright {
     height: 20px;
 }
 
-.cart-badge:empty, .cart-badge[data-count="0"] {
+.cart-badge:empty,
+.cart-badge[data-count="0"] {
     display: none;
 }
+
 .cart-badge {
     /* Existing styles */
     transition: transform 0.3s ease;
 }
+
 .cart-badge.updated {
     transform: scale(1.2);
 }
 
 
 
-#lg-bag, #mobile {
-    position: relative; 
+#lg-bag,
+#mobile {
+    position: relative;
 }
 
 /* Checkout Page Styles */
@@ -1672,12 +1699,12 @@ footer .copyright {
 /* Media Query for Mobile */
 @media (max-width: 799px) {
     #header {
-        padding: 10px 30px; 
-        height: 60px; 
+        padding: 10px 30px;
+        height: 60px;
     }
 
     #logo {
-        font-size: 24px; 
+        font-size: 24px;
     }
 
     #navbar {
