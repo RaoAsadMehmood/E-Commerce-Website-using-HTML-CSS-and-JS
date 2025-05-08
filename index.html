@@ -24,79 +24,79 @@
 
 <body>
     <style>
-        /* Inline styling for mobile toggle and cart badge */
+       
         @media (max-width: 799px) {
             #navbar {
-                display: none; /* Hidden by default */
+                display: none; 
                 position: fixed;
                 top: 0;
                 right: 0;
                 height: 100vh;
-                width: 250px; /* Increased width for better spacing */
-                background: #1a1a1a; /* Dark background to match theme */
+                width: 250px;
+                background: #1a1a1a;
                 flex-direction: column;
-                padding: 40px 20px; /* More padding for better layout */
+                padding: 40px 20px;
                 z-index: 1000;
-                transition: all 0.3s ease; /* Smooth transition for open/close */
+                transition: all 0.3s ease;
             }
 
             #navbar.active {
-                display: flex; /* Show when active class is added */
+                display: flex;
             }
 
             #navbar li {
-                margin: 15px 0; /* Spacing between menu items */
+                margin: 15px 0; 
             }
 
             #navbar li a {
-                color: #e3e6e6; /* Light text color to match theme */
-                font-size: 18px; /* Larger font for better readability */
+                color: #e3e6e6; 
+                font-size: 18px;
                 font-weight: 500;
                 text-decoration: none;
-                transition: color 0.3s ease; /* Smooth color transition on hover */
+                transition: color 0.3s ease; 
             }
 
             #navbar li a:hover {
-                color: #6f42c1; /* Accent color on hover (purple shade from theme) */
+                color: #FF7362; 
             }
 
             #close {
-                display: none; /* Hidden by default */
+                display: none; 
                 position: absolute;
                 top: 20px;
                 right: 20px;
                 font-size: 24px;
-                color: #e3e6e6; /* Light color for close icon */
+                color: #e3e6e6; 
                 cursor: pointer;
-                background: #6f42c1; /* Purple background for close button */
+                background: #FF7362; /* Purple background for close button */
                 padding: 5px 10px;
                 border-radius: 50%;
                 transition: background 0.3s ease;
             }
 
             #close:hover {
-                background: #563d7c; /* Darker purple on hover */
+                background: #d45b4d; 
             }
 
             #navbar.active #close {
-                display: block; /* Show close icon when navbar is active */
+                display: block; 
             }
 
             #mobile {
                 display: flex;
                 align-items: center;
-                gap: 15px; /* Space between cart and menu icons */
+                gap: 15px; 
             }
 
             #bar {
                 font-size: 24px;
-                color: #e3e6e6; /* Light color for menu icon */
+                color: #e3e6e6; 
                 cursor: pointer;
                 transition: color 0.3s ease;
             }
 
             #bar:hover {
-                color: #6f42c1; /* Purple shade on hover */
+                color: #FF7362; /* Purple shade on hover */
             }
 
             /* Cart badge styling */
@@ -104,8 +104,8 @@
                 position: absolute;
                 top: -10px;
                 right: -10px;
-                background: #6f42c1; /* Purple background for badge */
-                color: #fff; /* White text */
+                background: #FF7362; 
+                color: #fff; 
                 font-size: 12px;
                 font-weight: 600;
                 padding: 2px 6px;
@@ -120,7 +120,7 @@
 
         /* Ensure cart badge styling applies to desktop view as well */
         .cart-badge {
-            background: #6f42c1; /* Consistent purple background */
+            background: #FF7362; /* Consistent purple background */
             color: #fff;
             font-size: 12px;
             font-weight: 600;
@@ -165,7 +165,7 @@
             <h4>Trade-in-offer</h4>
             <h2>Super value deals</h2>
             <h1>On all products</h1>
-            <p>Save more with coupons & up to 70% off!</p>
+            <p style="font-size: 18px; color: whitesmoke;">Save more with coupons & up to 70% off!</p>
             <a href="shop.html"><button>Shop Now</button></a>
         </div>
     </section>
